@@ -13,11 +13,12 @@ export default function GlassCard({ children, className = "", glow = "rgba(96,16
   const rotateY = useTransform(sx, [-1, 1], [-5, 5]);
 
   const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const r = ref.current?.getBoundingClientRect(); if (!r) return;
+    const el = ref.current;
+    const r = el?.getBoundingClientRect(); if (!el || !r) return;
     rx.set((e.clientX - r.left) / r.width * 2 - 1);
     ry.set((e.clientY - r.top) / r.height * 2 - 1);
-    ref.current.style.setProperty("--mx", `${((e.clientX - r.left) / r.width) * 100}%`);
-    ref.current.style.setProperty("--my", `${((e.clientY - r.top) / r.height) * 100}%`);
+    el.style.setProperty("--mx", `${((e.clientX - r.left) / r.width) * 100}%`);
+    el.style.setProperty("--my", `${((e.clientY - r.top) / r.height) * 100}%`);
   };
   const reset = () => { rx.set(0); ry.set(0); };
 
